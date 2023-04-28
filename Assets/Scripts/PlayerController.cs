@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 	public AudioClip jumpSound;
 	public AudioClip crashSound;
 	private AudioSource playerAudio;
+	public float doubleJumpForce;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,12 @@ public class PlayerController : MonoBehaviour
 			playerAnim.SetTrigger("Jump_trig");
 			dirtParticle.Stop();
 			playerAudio.PlayOneShot(jumpSound, 0.4f);
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space) && !isOnGround && !gameOver)
+		{
+			playerRb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
+			isOnGround = true;
 		}
     }
 
