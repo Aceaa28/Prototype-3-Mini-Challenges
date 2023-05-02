@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 	public AudioClip crashSound;
 	private AudioSource playerAudio;
 	public float doubleJumpForce;
+	public bool doubleSpeed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,18 @@ public class PlayerController : MonoBehaviour
 		{
 			playerRb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
 			isOnGround = true;
+		}
+
+		if (Input.GetKey(KeyCode.X))
+		{
+			doubleSpeed = true;
+			playerAnim.SetFloat("Speed_f", 2);
+		}
+
+		else if (doubleSpeed == true)
+		{
+			doubleSpeed = false;
+			playerAnim.SetFloat("Speed_f", 1);
 		}
     }
 
